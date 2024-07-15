@@ -1,0 +1,68 @@
+<div class="container">
+  <h3 class="text-success">Simple Todo using Angualr + Spring + SQL</h3>
+  <!-- <h2>Reactive Form Example</h2> -->
+  <form (ngSubmit)="addTask()">
+
+    <div class="row mt-5">
+      <div class="col-10">
+        <input type="text" class="form-control" name="taskDesc" id="task" placeholder="Enter Task"
+          [(ngModel)]="newTask.description">
+      </div>
+      <div class="col-2">
+        <button class="btn btn-success" type="submit">Add Task</button>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-10">
+        <div *ngIf="!(tasks.length > 0) else taskList">
+          <h5 class="text-danger">No Task Found...</h5>
+        </div>
+        <ng-template #taskList>
+          <ul class="list-group" *ngFor="let task of tasks">
+            <li class="list-group-item mt-2">
+              <div class="row">
+                <div class="col-8">{{task.description}}</div>
+                <button class="col-2 btn btn-primary" type="button" (click)="editTask(task)">Edit</button>
+                <button class="col-2 btn btn-danger" type="button" (click)="deleteTask(task.id)" > Delete</button>
+              </div>
+
+            </li>
+          </ul>
+        </ng-template>
+
+      </div>
+      <div class="col-6 mt-5">
+        <div *ngIf="editingTask">
+          <form (ngSubmit)="updateTaskDetails()">
+            <label for="editTaskDescription">Edit Task : </label>
+            <div class="form-group">
+              <input type="text" class="form-control" name="UpdateTaskDesc" id="editTaskDescription"
+                placeholder="Enter Task" [(ngModel)]="updatedTask.description">
+            </div>
+            <div class="mt-3">
+
+            <button class="btn btn-success mx-2" type="submit">Update</button>
+            <button class="btn btn-danger" type="button" (click)="cancelEdit()">Cancel</button>
+          </div>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter Password">
+      </div>
+  
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" class="form-control" id="confirmPassword" placeholder="Enter Confirm Password">
+      </div> -->
+
+    <!-- <div class="btn btn-primary" type="submit">Register</div> -->
+
+  </form>
+</div>
